@@ -36,7 +36,14 @@
                         <div>
                             @auth
                                 <a href="{{ url('/home') }}" >Home</a>
+                            <!-- onclick remove default action and setting the a tag for getting the hidden form -->
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit(); " >Logout</a>
+                            <!-- hidden form to get post request for logout ,display :none only csrf token  -->
+                                <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none">
+                                    @csrf
+                                </form>
                             @else
+
                                 <a href="{{ route('login') }}" >Login</a>
 
                                 @if (Route::has('register'))
