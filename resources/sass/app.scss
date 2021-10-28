@@ -11,7 +11,9 @@ body{
     color: $text;
 
 }
-
+.h1{
+    margin-bottom: 30px;
+}
 .navbar{
     background-color: $navbar;
     box-shadow: 0 5px 10px 0 rgba(204,204,204,0.3);
@@ -21,4 +23,9 @@ body{
         color: #ffffff;
     }
 
+}
+
+.card{
+    box-shadow:0 2px 4px rgba(204,204,204,0.8);
+    padding: 20px 40px;
 }
