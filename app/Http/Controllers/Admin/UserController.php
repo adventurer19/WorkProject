@@ -16,10 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return  view('admin.users.index',[
-            'users'=>User::all(),
-            'roles'=>Role::all()
-        ]);
+       return view('admin.users.index',['users'=>User::paginate(10)]);
 
     }
 
@@ -31,6 +28,8 @@ class UserController extends Controller
     public function create()
     {
         //
+        return view('admin.users.create');
+
     }
 
     /**
@@ -42,6 +41,12 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        $user = User::create($request->except(['_token','roles']));
+
+
+        $request->session()->flash('success','You have created the user.');
+
+        return redirect(route('admin.users.index'));
     }
 
     /**
@@ -64,6 +69,9 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+
+        return view('admin.users.edit',['user'=>User::find($id)]);
+
     }
 
     /**
@@ -76,6 +84,15 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $user = User::findOrFail($id);
+        if(!$user){
+            $request->session()->flash('error','You can not edit this user.');
+        }
+
+        $user->update($request->except(['_token','roles']));
+        $request->session()->flash('success','The user is edited deleted.');
+
+        return redirect(route('admin.users.index'));
     }
 
     /**
@@ -84,8 +101,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {
+
         //
+        User::destroy($id);
+        $request->session()->flash('success','The user is successfully deleted.');
+        return redirect(route('admin.users.index'));
     }
 }

@@ -1,8 +1,8 @@
 @extends('templates.main')
 
 @section('content')
-    <h1>login</h1>
-    <div class="col-md-4 offset-4">
+    <div class="col-md-4     offset-4 card">
+        <h1>Login</h1>
         <form method="post" action="{{route('login')}} ">
             @csrf
             <div class="mb-3">

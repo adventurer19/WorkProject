@@ -56,7 +56,8 @@
             </div>
             </div>
     </nav>
-   <main>
+   <main class="container">
+       @include('partials.alerts')
        @yield('content')
    </main>
     </body>

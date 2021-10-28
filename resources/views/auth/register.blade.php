@@ -1,8 +1,9 @@
 @extends('templates.main')
 
 @section('content')
-    <div class="col-md-4 offset-4">
-        <form method="post" action="{{route('register')}} ">
+    <div class="col-md-4 offset-4 card">
+        <h1>Sign up</h1>
+    <form method="post" action="{{route('register')}} ">
             @csrf
                 <div class="mb-3">
                     <label for="name" class="form-label">Name</label>
