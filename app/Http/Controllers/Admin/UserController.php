@@ -87,10 +87,12 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         if(!$user){
             $request->session()->flash('error','You can not edit this user.');
+            return redirect(route('admin.users.index'));
+
         }
 
         $user->update($request->except(['_token','roles']));
-        $request->session()->flash('success','The user is edited deleted.');
+        $request->session()->flash('success','The user is edited successfully.');
 
         return redirect(route('admin.users.index'));
     }
