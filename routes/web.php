@@ -16,6 +16,6 @@ use App\Http\Controllers\Admin\UserController;
 Route::get('/', function () {
     return view('index');
 });
-Route::prefix('admin')->middleware('auth')->name('admin.')->group(function (){
+Route::prefix('admin')->middleware(['auth','auth.admin'])->name('admin.')->group(function (){
     Route::resource('/users',UserController::class);
 });

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{csrf_token()}}">
-        <title>{{config('app.name','system')}}</title>
+        <title>{{config('app.name','Laravel')}}</title>
 
         <!-- Styles -->
         <link   href="{{asset('css/app.css')}}" rel="stylesheet">
@@ -12,6 +12,7 @@
         <script src="{{asset('js/app.js')}}" defer></script>
     </head>
     <body>
+
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="#">{{config('app.name','system')}}</a>
@@ -21,6 +22,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
                 <div class="form-inline my-2 my-lg-0">
                     @if (Route::has('login'))
+
                         <div>
                             @auth
                                 <a href="{{ url('/home') }}" >Home</a>
@@ -43,6 +45,7 @@
                 </div>
             </div>
     </nav>
+    @can('logged-in')
     <nav class="navbar sub-nav navbar-expand-lg">
         <div class="container">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -50,9 +53,11 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="#">Home</a>
                     </li>
+                    @can('is-admin')
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('admin.users.index')}}">Users</a>
                     </li>
+                    @endcan
                     <li class="nav-item">
                         <a class="nav-link" href="{{}}">Products</a>
                     </li>
@@ -60,6 +65,7 @@
             </div>
         </div>
     </nav>
+    @endcan
    <main class="container">
        @include('partials.alerts')
        @yield('content')

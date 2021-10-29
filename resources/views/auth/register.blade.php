@@ -10,16 +10,16 @@
                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="exampleInputEmail1" aria-describedby="name" value="{{old('name')}}">
                         @error('name')
                             <span class="invalid-feedback" role="alert">
-                                {{ $message}}}
+                                {{ $message}}
                             </span>
                         @enderror
-                </div>
+                </div
                 <div class="mb-3">
                     <label for="email" class="form-label">Email address</label>
                     <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" aria-describedby="email" value="{{old('email')}}">
                         @error('email')
                             <span class="invalid-feedback" role="alert">
-                                {{$message}}}
+                                {{$message}}
                             </span>
                         @enderror
                 </div>
@@ -28,7 +28,7 @@
                     <input type="password" name="password" class="form-control" id="password">
                         @error('password')
                             <span class="invalid-feedback" role="alert">
-                                {{$message}}}
+                                {{$message}}
                             </span>
                         @enderror
                 </div>
@@ -37,7 +37,7 @@
                     <input type="password" name="password_confirmation" class="form-control" id="password_confirmation">
                         @error('password_confirmation')
                             <span class="invalid-feedback" role="alert">
-                                {{$message}}}
+                                {{$message}}
                             </span>
                         @enderror
                 </div>

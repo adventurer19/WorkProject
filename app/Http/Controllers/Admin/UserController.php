@@ -20,13 +20,13 @@ class UserController extends Controller
     public function index()
     {
         if(Gate::denies('logged-in')){
-            dd('no access allowed');
+         //   dd('no access allowed');
         }
         if(Gate::allows('is-admin')){
 
             return view('admin.users.index',['users'=>User::paginate(10)]);
         }
-        dd('you need to be admin to continue');
+
 
     }
 
@@ -51,12 +51,11 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-//        $validatedData = $request->validated();
-//        $user = User::create($validatedData);
-            $newUser = new CreateNewUser();
+
+        $newUser = new CreateNewUser();
         $user =$newUser->create($request->all());
         $user->roles()->attach([
-            'role_id'=>1,
+            'role_id'=>2,
         ]);
 
 

@@ -23,9 +23,23 @@ class RoleUserSeeder extends Seeder
         // check table role_user
         User::all()->each(function ($user){
             $user->roles()->attach([
+               'role_id'=>2,
             ]);
 
         });
+        $user = User::where('name','nikolay')->first();
+        $user->roles()->attach([
+           'role_id'=>1
+        ]);
+
+
+        //fix syntax
+
+//        $user = User::all()->last()->first();
+//        $user->roles()->attach([
+//            'role_id'=>1
+//        ]);
+
 
     }
 }

@@ -57,15 +57,17 @@ class User extends Authenticatable
         return null !==$this->roles()->where('name',$role)->first();
 
     }
-    public function setAdmin(){
-        // problem it can be added multiple times
-       $id =   $this->attributes['id'];
-        DB::table('role_user')->insert([
-            'role_id'=>1,
-            'user_id'=>$id
-        ]);
+//    public function setAdmin(){
+//        // problem it can be added multiple times
+//       $id =   $this->attributes['id'];
+//        DB::table('role_user')->insert([
+//            'role_id'=>1,
+//            'user_id'=>$id
+//        ]);
+//
+//    }
 
-    }
+
 
 
 
