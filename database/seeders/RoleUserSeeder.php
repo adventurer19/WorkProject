@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class RoleUserSeeder extends Seeder
 {
@@ -15,11 +16,16 @@ class RoleUserSeeder extends Seeder
      */
     public function run()
     {
-        $roles = Role::all();
 
-        User::all()->each(function ($user)use ($roles){
-           $user->roles()->attach($roles->random(1)->pluck('id')
-           );
+        // setting all users by default to have role_id on 2
+        // table roles -> id 1 is Admin and id 2 is User,
+        // so role_id = 2 means that the user is assign to have role user.
+        // check table role_user
+        User::all()->each(function ($user){
+            $user->roles()->attach([
+            ]);
+
         });
+
     }
 }

@@ -10,7 +10,7 @@
                 <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" aria-describedby="email" value="{{old('email')}}">
                 @error('email')
                 <span class="invalid-feedback" role="alert">
-                                {{$message}}}
+                                {{$message}}
                             </span>
                 @enderror
             </div>
@@ -19,7 +19,7 @@
                 <input type="password" name="password" class="form-control" id="password">
                 @error('password')
                 <span class="invalid-feedback" role="alert">
-                                {{$message}}}
+                                {{$message}}
                             </span>
                 @enderror
             </div>

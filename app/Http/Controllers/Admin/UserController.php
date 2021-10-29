@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Actions\Fortify\CreateNewUser;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUserRequest;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -16,7 +19,14 @@ class UserController extends Controller
      */
     public function index()
     {
-       return view('admin.users.index',['users'=>User::paginate(10)]);
+        if(Gate::denies('logged-in')){
+            dd('no access allowed');
+        }
+        if(Gate::allows('is-admin')){
+
+            return view('admin.users.index',['users'=>User::paginate(10)]);
+        }
+        dd('you need to be admin to continue');
 
     }
 
@@ -27,7 +37,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+
+
         return view('admin.users.create');
 
     }
@@ -38,10 +49,15 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
-        $user = User::create($request->except(['_token','roles']));
+//        $validatedData = $request->validated();
+//        $user = User::create($validatedData);
+            $newUser = new CreateNewUser();
+        $user =$newUser->create($request->all());
+        $user->roles()->attach([
+            'role_id'=>1,
+        ]);
 
 
         $request->session()->flash('success','You have created the user.');
@@ -84,7 +100,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $user = User::findOrFail($id);
+        $user = User::find($id);
         if(!$user){
             $request->session()->flash('error','You can not edit this user.');
             return redirect(route('admin.users.index'));
