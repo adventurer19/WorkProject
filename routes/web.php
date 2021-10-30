@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
-
+use App\Http\Controllers\Product\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +13,15 @@ use App\Http\Controllers\Admin\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
+Route::name('/')->get('/', function () {
     return view('index');
 });
+Route::get('/home',function (){
+    return view('product.index');
+});
+Route::prefix('products')->resource('/product',ProductController::class);
+
+
 Route::prefix('admin')->middleware(['auth','auth.admin'])->name('admin.')->group(function (){
     Route::resource('/users',UserController::class);
 });

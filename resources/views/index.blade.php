@@ -1,6 +1,59 @@
 @extends('templates.main')
 
 @section('content')
+    <div style="margin: 30px">
+    </div>
+    <div class="card p-2 col-4 offset-4 align-items-right">
+        <div class="p-2" >
+            <label for="">
+                Product Name
+                <input type="text" placeholder="Search.. "  >
+            </label>
+        </div>
+        <div class="p-2">
+            <label for="">
+                Category
+                <select id="cars" name="cars" style="border:none">
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="fiat">Fiat</option>
+                    <option value="audi">Audi</option>
+                </select>
+            </label>
+        </div>
 
-    <h1>hi from Index</h1>
+        <div class="offset-10">
+            </button>
+            <button class="btn btn-sm btn-primary" href="" role="button">Search
+        </div>
+    </div>
+
+    <div class="card m-5">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#Id</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Category</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th> 123 </th>
+                <td> 123</td>
+                <td> 123</td>
+                <td>
+
+
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+
+
 @endsection
