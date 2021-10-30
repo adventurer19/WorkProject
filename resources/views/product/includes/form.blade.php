@@ -36,14 +36,17 @@
 </div>
 
 <div class="row">
-    <label for="image" class="col-md-4 col-form-label">Post Image</label>
+    <label for="image" class="col-md-4 col-form-label"></label>
     <input type="file" class="form-control-file" id="image" name="image">
     @error('image')
-    <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
+    <p class="" role="alert" style="color:#dc3545;font-size:15px;">
+                   {{ $message }}
+                </p>
     @enderror
 </div>
+
+
+
 {{--<div class="mb-3">--}}
 {{--    <label for="email" class="form-label">Email address</label>--}}
 {{--    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" aria-describedby="email" value="{{old('email')}}--}}

@@ -51,7 +51,6 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-
         $newUser = new CreateNewUser();
         $user =$newUser->create($request->all());
         $user->roles()->attach([

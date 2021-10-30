@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-
     protected $fillable = [
+        'user_id',
         'name',
         'category',
         'description',
-        'user_id'
+        'image',
     ];
     public function uploadedFrom(){
         return $this->belongsTo(User::class);

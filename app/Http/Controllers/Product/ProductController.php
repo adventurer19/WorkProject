@@ -7,9 +7,14 @@ use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +22,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('product.index');
+        return view('product.index',['products'=>Product::paginate(10)]);
+
+        // return view('product.index',['products'=>Product::paginate(10)]);
+       // todo
+        //return view('admin.users.index',['users'=>User::paginate(10)]);
+
     }
 
     /**
@@ -40,14 +50,21 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
 
-        $id = Auth::user()->id;
-        $request->request->add([
-            'user_id'=>$id]);
-        $product = new Product();
+        $imagePath = $request['image']->store('uploads','public');
+        $image = Image::make(public_path("storage/{$imagePath}"))->fit(500,500);
+        $image->save();
+        auth()->user()->products()->create([
+            'name'=>$request['name'],
+            'category'=>$request['category'],
+            'description'=>$request['description'],
+            'image'=>$imagePath
+        ]);
+        return redirect(route('product.index'));
 
-        $store = $product->create($request->except('_token'));
 
-        dd($store);
+
+
+
 
     }
 
