@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,6 +60,8 @@ class ProductController extends Controller
             'description'=>$request['description'],
             'image'=>$imagePath
         ]);
+        $request->session()->flash('success','You have successfully added a new product.');
+
         return redirect(route('product.index'));
 
 
@@ -87,7 +90,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        return view('product.edit',['product'=>Product::find($id)]);
+
+
     }
 
     /**
@@ -99,7 +105,19 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $product = Product::find($id);
+        if(!$product){
+            $request->session()->flash('error','You can not edit this product.');
+            return redirect(route('product.index'));
+
+        }
+
+        $product->update($request->except('image'));
+
+        $request->session()->flash('success','The Product is edited successfully.');
+
+        return redirect(route('product.index'));
     }
 
     /**
@@ -108,8 +126,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {
-        //
+        Product::destroy($id);
+        $request->session()->flash('success','The product is deleted successfully.');
+        return redirect(route('product.index'));
+
     }
 }

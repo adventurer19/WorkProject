@@ -3,10 +3,10 @@
 @section('content')
 
     <div class="col-md-4 offset-4 card">
-        <h1>Edit User</h1>
-        <form method="POST" action="{{route('admin.users.update',$user->id)}} ">
+        <h1>Edit Product</h1>
+        <form method="POST" action="{{route('product.update',$product->id)}} ">
             @method('PATCH')
-            @include('admin.users.includes.form')
+            @include('product.includes.form')
         </form>
     </div>
 

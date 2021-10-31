@@ -5,7 +5,7 @@
         <div class="col-12 p-3">
             <h1 class="float-left">All Products</h1>
             <a class="btn btn-sm btn-success "  href="{{route('product.create')}}" role="button" >Add New Product</a>
-            <a class="btn btn-sm btn-success "  href="{{route('product.create')}}" role="button" >Add New Category</a>
+            <a class="btn btn-sm btn-success "  href="category.blade.php" role="button" >Add New Category</a>
         </div>
     </div>
     <div class="card">
@@ -26,9 +26,8 @@
                     <td>{{$product->category}}</td>
                     <td>{{$product->description}}</td>
                     <td><img src="/storage/{{$product->image}}" style="width: 50px;height: 50px" alt=""></td>
-
                                     <td>
-                        <a class="btn btn-sm btn-primary" href="{{route("admin.users.edit",$product->id)}}" role="button" >Edit</a>
+                        <a class="btn btn-sm btn-primary" href="{{route("product.edit",$product->id)}}" role="button" >Edit</a>
                         <button type="button" class="btn btn-sm btn-danger"
                                 onclick="event.preventDefault();
                                     if(confirm ('are you sure')){
@@ -37,7 +36,7 @@
                                     ">
                             Delete
                         </button>
-                        <form id="delete-user-form-{{ $product->id }}" action="{{route('admin.users.destroy',$product->id)}}" method="POST" style="display: none">
+                        <form id="delete-user-form-{{ $product->id }}" action="{{route('product.destroy',$product->id)}}" method="POST" style="display: none">
                             @csrf
                             @method("DELETE")
                         </form>

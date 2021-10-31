@@ -14,10 +14,10 @@
             <label for="">
                 Category
                 <select id="cars" name="cars" style="border:none">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="fiat">Fiat</option>
-                    <option value="audi">Audi</option>
+{{--                    <option value="volvo">Volvo</option>--}}
+{{--                    <option value="saab">Saab</option>--}}
+{{--                    <option value="fiat">Fiat</option>--}}
+{{--                    <option value="audi">Audi</option>--}}
                 </select>
             </label>
         </div>

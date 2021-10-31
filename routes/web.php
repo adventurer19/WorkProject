@@ -19,6 +19,10 @@ Route::name('/')->get('/', function () {
 Route::get('/home',function (){
     return view('product.index');
 });
+
+//Route::name('add_category')->get('/gege',function (){
+//    return \route()
+//})
 Route::prefix('products')->middleware('auth')->resource('/product',ProductController::class);
 
 
