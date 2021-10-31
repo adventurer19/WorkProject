@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\Category\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,17 +15,20 @@ use App\Http\Controllers\Product\ProductController;
 |
 */
 Route::name('/')->get('/', function () {
-    return view('index');
+    return view('home.index',['categories'=>\App\Models\Category::all()]);
 });
-Route::get('/home',function (){
-    return view('product.index');
-});
+//Route::name('search')->get('/search',function (){
+//    return view('home.index',['categories'=>\App\Models\Category::all()]);
+//});
 
-//Route::name('add_category')->get('/gege',function (){
-//    return \route()
-//})
+//Route::get('/home',function (){
+//    return view('product.index');
+//});
+
+
 Route::prefix('products')->middleware('auth')->resource('/product',ProductController::class);
 
+Route::prefix('categories')->middleware('auth')->resource('/category',CategoryController::class);
 
 Route::prefix('admin')->middleware(['auth','auth.admin'])->name('admin.')->group(function (){
     Route::resource('/users',UserController::class);

@@ -48,13 +48,14 @@
                 </div>
             </div>
     </nav>
+
     @can('logged-in')
     <nav class="navbar sub-nav navbar-expand-lg">
         <div class="container">
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{'/'}}">Home</a>
+                        <a class="nav-link" href="{{route('search')}}">Home</a>
                     </li>
                     @can('is-admin')
                     <li class="nav-item">
@@ -64,6 +65,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('product.index')}}">Products</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('category.index')}}">Categories</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -71,7 +75,9 @@
     @endcan
    <main class="container">
        @include('partials.alerts')
+
        @yield('content')
+
    </main>
     </body>
 </html>

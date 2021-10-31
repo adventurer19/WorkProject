@@ -21,15 +21,21 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function search(){
+
+        return view('home.index',['products'=>Product::paginate(10)],['categories'=>Category::all()]);
+    }
+
     public function index()
     {
-        return view('product.index',['products'=>Product::paginate(10)]);
-
+        return view('product.index',['products'=>Product::paginate(10)],['categories'=>Category::all()]);
+//
         // return view('product.index',['products'=>Product::paginate(10)]);
        // todo
         //return view('admin.users.index',['users'=>User::paginate(10)]);
 
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -50,21 +56,43 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
+        $categoryName = $request->category;
+        if(!Category::where('name',$categoryName)->exists()){
+           auth()->user()->categories()->create([
+              'name'=>$categoryName
+           ]);
+        }
+        //
 
         $imagePath = $request['image']->store('uploads','public');
         $image = Image::make(public_path("storage/{$imagePath}"))->fit(500,500);
         $image->save();
+
+        $idCategory = Category::where('name',$categoryName)->first()->id;
         auth()->user()->products()->create([
+            'category_id'=>$idCategory,
             'name'=>$request['name'],
             'category'=>$request['category'],
             'description'=>$request['description'],
             'image'=>$imagePath
         ]);
+        dd(auth()->user()->products());
         $request->session()->flash('success','You have successfully added a new product.');
 
         return redirect(route('product.index'));
 
 
+        //old/
+//        $imagePath = $request['image']->store('uploads','public');
+//        $image = Image::make(public_path("storage/{$imagePath}"))->fit(500,500);
+//        $image->save();
+//        auth()->user()->products()->create([
+//            'name'=>$request['name'],
+//            'category'=>$request['category'],
+//            'description'=>$request['description'],
+//            'image'=>$imagePath
+//        ]);
+//        $request->session()->flash('success','You have successfully added a new product.');
 
 
 

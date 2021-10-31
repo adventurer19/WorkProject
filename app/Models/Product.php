@@ -9,14 +9,15 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id',
+//        'user_id',
+        'category_id',
         'name',
-        'category',
         'description',
         'image',
     ];
+
     public function uploadedFrom(){
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class);
     }
 
 

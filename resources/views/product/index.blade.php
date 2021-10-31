@@ -1,11 +1,11 @@
-@extends('templates.main')
+@extends('body.main')
 
 @section('content')
     <div class="row">
         <div class="col-12 p-3">
             <h1 class="float-left">All Products</h1>
             <a class="btn btn-sm btn-success "  href="{{route('product.create')}}" role="button" >Add New Product</a>
-            <a class="btn btn-sm btn-success "  href="category.blade.php" role="button" >Add New Category</a>
+{{--            <a class="btn btn-sm btn-success "  href="category.blade.php" role="button" >Add New Category</a>--}}
         </div>
     </div>
     <div class="card">
@@ -13,7 +13,7 @@
             <thead>
             <tr>
                 <th scope="col">Product Name</th>
-                <th scope="col">Category</th>
+{{--                <th scope="col">Category</th>--}}
                 <th scope="col">Description</th>
                 <th scope="col">Image</th>
                 <th scope="col">Actions</th>
@@ -23,7 +23,7 @@
             @foreach($products as $product)
                 <tr>
                     <th scope="row">{{$product->name}}</th>
-                    <td>{{$product->category}}</td>
+{{--                    <td>{{$product->category}}</td>--}}
                     <td>{{$product->description}}</td>
                     <td><img src="/storage/{{$product->image}}" style="width: 50px;height: 50px" alt=""></td>
                                     <td>

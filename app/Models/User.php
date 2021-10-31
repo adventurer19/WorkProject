@@ -46,12 +46,23 @@ class User extends Authenticatable
     ];
 
     public function products(){
+
         return $this->hasMany(Product::class);
+
     }
 
     public function roles(){
+
         return $this->belongsToMany(Role::class);
+
     }
+
+    public function categories(){
+
+        return $this->hasMany(Category::class);
+
+    }
+
     /** check if the user has a role
      *@param string $role
      * @return bool
@@ -61,15 +72,7 @@ class User extends Authenticatable
         return null !==$this->roles()->where('name',$role)->first();
 
     }
-//    public function setAdmin(){
-//        // problem it can be added multiple times
-//       $id =   $this->attributes['id'];
-//        DB::table('role_user')->insert([
-//            'role_id'=>1,
-//            'user_id'=>$id
-//        ]);
-//
-//    }
+
 
 
 

@@ -1,4 +1,4 @@
-@extends('templates.main')
+@extends('body.main')
 
 @section('content')
 <div class="row">
