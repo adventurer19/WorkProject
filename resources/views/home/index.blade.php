@@ -1,37 +1,41 @@
 @extends('body.main')
 
 @section('content')
-    <div style="margin: 300px">
+    <div style="margin: 250px">
     </div>
-    <div class="card p-2 col-4 offset-4 align-items-right" >
-        <div class="p-2" >
-            <label for="">
+    <div class="card p-1 col-4 offset-4 align-items-right" >
+        <form action="{{route('list')}}" method="get">
+
+<div class="p-2">
+
+
+            <label for="product">
                 Product Name
-                <input type="text" placeholder="Search.. "  >
+                <input name="product" type="text" placeholder="Search.. "  >
             </label>
-        </div>
-        <div class="p-2">
-            <label for="">
+</div>
+<div class="p-2">
+
+
+            <label for="category">
                 Category
-                <select id="cars" name="cars" style="border:none">
+                <select id="cars" name="category" style="border:none">
                     @foreach($categories as $category)
-                        <div>{{var_dump($categories)}}</div>
+
                         <option value="{{$category->name}}">{{$category->name}}</option>
                     @endforeach
                     <option value="empty">no category</option>
-{{--                    <option value="saab">Saab</option>--}}
-{{--                    <option value="fiat">Fiat</option>--}}
-{{--                    <option value="audi">Audi</option>--}}
+
                 </select>
             </label>
-        </div>
-
+</div>
         <div class="offset-10">
+            <button class="btn btn-sm btn-primary" href="{{route('list')}}" role="button">Search
             </button>
-            <button class="btn btn-sm btn-primary" href="" role="button">Search
-        </div>
-    </div>
 
+        </div>
+        </form>
+    </div>
 {{--    <div class="card m-5">--}}
 {{--        <table class="table">--}}
 {{--            <thead>--}}

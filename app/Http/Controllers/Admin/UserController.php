@@ -17,11 +17,11 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        if(Gate::denies('logged-in')){
-         //   dd('no access allowed');
-        }
+    public function index(){
+
+//        if(Gate::denies('logged-in')){
+//         //   dd('no access allowed'); -- testng
+//        }
         if(Gate::allows('is-admin')){
 
             return view('admin.users.index',['users'=>User::paginate(10)]);
@@ -35,9 +35,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-
+    public function create(){
 
         return view('admin.users.create');
 

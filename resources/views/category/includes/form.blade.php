@@ -7,7 +7,7 @@
            class="form-control @error('category') is-invalid @enderror"
            id="category" aria-describedby="category"
            placeholder="Write a category name"
-           value="{{old('category')}}">
+           value="">
 
 
     @error('category')
@@ -16,5 +16,5 @@
 
 
 </div>
-<button type="submit" class="btn btn-primary">!!!!</button>
+<button type="submit" class="btn btn-primary">Save</button>
 

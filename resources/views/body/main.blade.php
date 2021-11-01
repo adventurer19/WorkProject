@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,14 +9,16 @@
 
         <!-- Styles -->
         <link   href="{{asset('css/app.css')}}" rel="stylesheet">
-        <link rel="icon" href="{{ url('css/favicon.jpg') }}">
+{{--        <link rel="icon" href="{{ url('storage/favicon.jpg') }}">--}}
+
+        <link rel="icon" type="image/png" sizes="32x32" href="{{asset('icon.ico')}}">
+        <link rel="icon" type="image/png" href="{{ asset('icon.png') }}">
         <!-- JS -->
 
 
         <script src="{{asset('js/app.js')}}" defer></script>
     </head>
     <body>
-
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="{{route('/')}}" >Product System</a>
@@ -55,7 +58,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{route('search')}}">Home</a>
+                        <a class="nav-link" href="{{route('/')}}">Home</a>
                     </li>
                     @can('is-admin')
                     <li class="nav-item">
@@ -74,10 +77,12 @@
     </nav>
     @endcan
    <main class="container">
+
        @include('partials.alerts')
 
        @yield('content')
 
    </main>
     </body>
+
 </html>

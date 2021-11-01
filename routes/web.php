@@ -17,9 +17,11 @@ use App\Http\Controllers\Category\CategoryController;
 Route::name('/')->get('/', function () {
     return view('home.index',['categories'=>\App\Models\Category::all()]);
 });
-//Route::name('search')->get('/search',function (){
-//    return view('home.index',['categories'=>\App\Models\Category::all()]);
+//Route::name('list')->get('/list',function (){
+//    return view('home.list',['categories'=>\App\Models\Category::all(),'products'=>\App\Models\Product::all()]);
 //});
+
+Route::name('list')->get('/list', [\App\Http\Controllers\HomeController::class, 'index']);
 
 //Route::get('/home',function (){
 //    return view('product.index');

@@ -24,6 +24,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(){
+
         return view('category.create');
 
     }
@@ -66,9 +67,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($id){
+
+
+        return view('category.edit',['category'=>Category::find($id)]);
+
     }
 
     /**
@@ -80,7 +83,25 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'category'=>'required|alpha|unique:categories,name'
+        ]);
+        $category = Category::find($id);
+
+        if(!$category){
+            $request->session()->flash('error','You can not edit this category.');
+            return redirect(route('category.index'));
+
+        }
+        $category->update([
+            'name'=>$request->category
+        ]);
+
+        $request->session()->flash('success','The category is edited successfully.');
+
+
+        return redirect(route('category.index'));
+
     }
 
     /**
@@ -89,8 +110,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id,Request $request){
+        Category::destroy($id);
+        $request->session()->flash('success','The product is deleted successfully.');
+        return redirect(route('category.index'));
+
     }
+
 }

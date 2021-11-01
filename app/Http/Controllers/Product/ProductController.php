@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
@@ -21,10 +22,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function search(){
 
-        return view('home.index',['products'=>Product::paginate(10)],['categories'=>Category::all()]);
-    }
 
     public function index()
     {
@@ -65,7 +63,7 @@ class ProductController extends Controller
         //
 
         $imagePath = $request['image']->store('uploads','public');
-        $image = Image::make(public_path("storage/{$imagePath}"))->fit(500,500);
+        $image = Image::make(public_path("storage/{$imagePath}"))->fit(250,250);
         $image->save();
 
         $idCategory = Category::where('name',$categoryName)->first()->id;
@@ -76,7 +74,6 @@ class ProductController extends Controller
             'description'=>$request['description'],
             'image'=>$imagePath
         ]);
-        dd(auth()->user()->products());
         $request->session()->flash('success','You have successfully added a new product.');
 
         return redirect(route('product.index'));
@@ -107,7 +104,10 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+//        $product = Product::find($id);
+        return view('product.show',['product'=>Product::find($id)]);
+
+
     }
 
     /**
