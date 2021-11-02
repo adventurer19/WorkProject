@@ -23,8 +23,12 @@
          style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
             height: 110vh">
 
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg p-2">
+        @auth <a class="navbar-brand">Logged as {{Auth::user()->name}}</a> @endauth
         <div class="container">
+{{--            "nav navbar-nav navbar-right"--}}
+
+{{--            @auth <a class="navbar-brand">Logged as {{Auth::user()->name}}</a> @endauth--}}
             <a class="navbar-brand " href="{{route('/')}}" >Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

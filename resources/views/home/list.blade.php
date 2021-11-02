@@ -68,6 +68,8 @@
                         @endforeach
                         </tbody>
         </table>
+        <a class="btn btn-sm btn-outline-primary" href="{{route('/')}}" role="button" >Back to the search</a>
+
     </div>
 
 </main>

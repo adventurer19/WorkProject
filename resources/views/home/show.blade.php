@@ -66,7 +66,7 @@
                     {{$product->category()->first()->name}}
                 </span>
                 <hr>
-                <a class="btn btn-sm btn-outline-primary" href="{{route('product.index')}}" role="button" >Back to list</a>
+                <a class="btn btn-sm btn-outline-primary" href="{{route('public.index')}}" role="button" >Back to list</a>
 
 
 

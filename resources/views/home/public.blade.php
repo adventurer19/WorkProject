@@ -18,8 +18,15 @@
     <script src="{{asset('js/app.js')}}" defer></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg">
+<div class="bg-image"
+     style="background-image: url('https://i.pinimg.com/originals/5c/03/3f/5c033fa242d47f2ce6420bd184b47140.png');
+            height: 100vh">
+<nav class="navbar navbar-expand-lg p-2">
+    @auth <a class="navbar-brand">Logged as {{Auth::user()->name}}</a> @endauth
     <div class="container">
+        {{--            "nav navbar-nav navbar-right"--}}
+
+        {{--            @auth <a class="navbar-brand">Logged as {{Auth::user()->name}}</a> @endauth--}}
         <a class="navbar-brand " href="{{route('/')}}" >Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -30,7 +37,6 @@
             @if (Route::has('login'))
                 @auth
                         <a href="{{route('panel') }}  " style="text-decoration: none" >Admin Panel</a>
-                    <span>{{auth()->id()}}</span>
                         <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit(); " style="text-decoration: none">Logout</a>
                         <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none;">
                             @csrf
@@ -51,5 +57,7 @@
 <main class="container">
     @include('home.index')
 </main>
+</div>
 </body>
+
 </html>
