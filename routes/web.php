@@ -28,7 +28,8 @@ Route::name('panel')->get('/panel',function (){
 
 
 
-Route::name('list')->get('/list', [\App\Http\Controllers\PublicController::class, 'index']);
+
+Route::prefix('public')->resource('/public',\App\Http\Controllers\PublicController::class);
 
 
 

@@ -32,43 +32,49 @@
                         </form>
                     @else
                         <a href="{{ route('login') }}" >Login</a>
+
+{{--                        @if (Route::has('register'))--}}
+{{--                            <a href="{{ route('register') }}" >Register</a>--}}
+                        @endif
                     @endauth
-                @endif
             </div>
         </div>
     </div>
 </nav>
 
 <main class="container">
+    <div class="p-5"></div>
+    <div class="card col-5 offset-3">
+        <div class="row">
+            <div class="col-sm-8">
+                <img src="/storage/{{$product->image}}" class="" alt="/views/errors/no-imageava.jpg" >
+            </div>
+            <div class="col-3">
+                <div>
+                    <div class="d-flex align-items-center">
+                    </div>
+                </div>
+                <strong>Product title</strong> :<span>
+                    {{$product->name}}
+                </span>
+                <hr>
+                <strong>Description</strong>:<span>
+                    {{$product->description}}
+                </span>
+                <hr>
+                <strong>Category</strong>:<span>
+                    {{$product->category()->first()->name}}
+                </span>
+                <hr>
+                <a class="btn btn-sm btn-outline-primary" href="{{route('product.index')}}" role="button" >Back to list</a>
 
 
+
+            </div>
+        </div>
     </div>
-    <div class="card m-5">
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Product Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Category</th>
-                <th scope="col">Image</th>
-            </tr>
-            </thead>
-                        <tbody>
-                        @foreach($items as $product)
-                            <tr>
-                                <td>{{$product->name}}</td>
-                                <td>{{$product->description}}</td>
-                                <td>{{$category}}</td>
-                                <td>
-                                    <a href="{{route("public.show",$product->id)}}" role="button" >
-                                    <img src="/storage/{{$product->image}}"  style="width: 40px;height: 35px" alt=""></a>
-                                    </td>
-
-                            </tr>
-                        @endforeach
-                        </tbody>
-        </table>
     </div>
+
 
 </main>
 

@@ -28,10 +28,7 @@ class ProductController extends Controller
     {
 
         return view('product.index',['products'=>Product::paginate(10)],['categories'=>Category::paginate(10)]);
-//
-        // return view('product.index',['products'=>Product::paginate(10)]);
-       // todo
-        //return view('admin.users.index',['users'=>User::paginate(10)]);
+
 
     }
 
@@ -80,17 +77,6 @@ class ProductController extends Controller
         return redirect(route('product.index'));
 
 
-        //old/
-//        $imagePath = $request['image']->store('uploads','public');
-//        $image = Image::make(public_path("storage/{$imagePath}"))->fit(500,500);
-//        $image->save();
-//        auth()->user()->products()->create([
-//            'name'=>$request['name'],
-//            'category'=>$request['category'],
-//            'description'=>$request['description'],
-//            'image'=>$imagePath
-//        ]);
-//        $request->session()->flash('success','You have successfully added a new product.');
 
 
 
@@ -105,7 +91,6 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-//        $product = Product::find($id);
         return view('product.show',['product'=>Product::find($id)]);
 
 

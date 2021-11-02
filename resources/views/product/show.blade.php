@@ -20,7 +20,7 @@
                 </span>
                 <hr>
                 <strong>Category</strong>:<span>
-                    TODO
+                    {{$product->category()->first()->name}}
                 </span>
                 <hr>
                 <a class="btn btn-sm btn-outline-primary" href="{{route('product.index')}}" role="button" >Back to list</a>

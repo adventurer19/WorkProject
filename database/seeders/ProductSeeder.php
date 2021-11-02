@@ -14,8 +14,9 @@ class ProductSeeder extends Seeder
      * @return void
      */
     public function run(){
+//        $data = ['food','drinks','phone','cars','cloths','education','technologies','music','entrainment','vacation'];
 
-        $data = ['bread','car','phone','charger','laptop','cup','meat','glasses','headphones','jacket'];
+        $data = ['kebab','wine','Samsung-S8','RangeRover','T-shirt','notebook','laptop','microphone','puzzle','umbrella'];
         for ($i = 1; $i <= 10; $i++) {
             $product = new Product([
                 'user_id'=>$i,

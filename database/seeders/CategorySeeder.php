@@ -15,7 +15,16 @@ class CategorySeeder extends Seeder
      */
     public function run() {
 
-        Category::factory()->times(10)->create();
+        $data = ['food','drinks','phone','cars','cloths','education','technologies','music','entrainment','vacation'];
+        for ($i = 1; $i <=10; $i++) {
+            $category= new Category([
+                'user_id'=>rand(1,10),
+                'name'=>$data[$i-1]
+            ]);
+            $category->save();
+
+        }
+//        Category::factory()->times(10)->create();
 
 //        User::all()->each(function ($user)  use($categories){
 //            $id= $user->id;

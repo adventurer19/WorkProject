@@ -15,10 +15,10 @@ class CategoryFactory extends Factory
     public function definition()
     {
 
-        return [
-            'name'=>$this->faker->unique()->word,
-            'user_id'=>rand(1,10)
-
-        ];
+//        return [
+//            'name'=>$this->faker->unique()->word,
+//            'user_id'=>rand(1,10)
+//
+//        ];
     }
 }
