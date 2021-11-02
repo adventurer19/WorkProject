@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -15,7 +18,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('category.index',['categories'=>Category::all()]);
+
+
+        return view('category.index',['data'=>Category::paginate(10)]);
+
     }
 
     /**
@@ -44,6 +50,7 @@ class CategoryController extends Controller
         ]);
 
         $category = Category::create([
+            'user_id'=>auth()->user()->id,
             'name'=>$request->category
         ]);
         return redirect(route('category.index'));

@@ -33,12 +33,6 @@ class RoleUserSeeder extends Seeder
         ]);
 
 
-        //fix syntax
-
-//        $user = User::all()->last()->first();
-//        $user->roles()->attach([
-//            'role_id'=>1
-//        ]);
 
 
     }

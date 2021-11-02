@@ -5,15 +5,14 @@
         <div class="col-12 p-3">
             <h1 class="float-left">All Products</h1>
             <a class="btn btn-sm btn-success "  href="{{route('product.create')}}" role="button" >Add New Product</a>
-{{--            <a class="btn btn-sm btn-success "  href="category.blade.php" role="button" >Add New Category</a>--}}
         </div>
     </div>
-    <div class="card">
+    <div class="card ">
         <table class="table">
             <thead>
             <tr>
                 <th scope="col">Product Name</th>
-{{--                <th scope="col">Category</th>--}}
+                <th scope="col">Category</th>
                 <th scope="col">Description</th>
                 <th scope="col">Image</th>
                 <th scope="col">Actions</th>
@@ -21,13 +20,15 @@
             </thead>
             <tbody>
             @foreach($products as $product)
-                <tr>
-                    <th scope="row">{{$product->name}}</th>
-                    <td>{{$product->category}}</td>
+                <tr class="m-5">
+                    <th scope="row"><a href="{{route("product.show",$product->id)}}" style="text-decoration: none;color: #1E2632">{{$product->name}}</a></th>
+                    <td>{{$product->category()->first()->name}}</td>
                     <td>{{$product->description}}</td>
-                    <td><img src="/storage/{{$product->image}}" style="width: 50px;height: 50px" alt=""></td>
+                    <td><a href="{{route("product.show",$product->id)}}">
+                        <img src="/storage/{{$product->image}}" href="{{"product.show,$product->id"}}" style="width: 40px;height: 35px" alt="">
+                        </a></td>
                     <td>
-                        <a class="btn btn-sm btn-primary" href="{{route("product.edit",$product->id)}}" role="button" >Edit</a>
+                        <a class="btn btn-sm btn-primary"  role="button" >Edit</a>
                                 <button type="button" class="btn btn-sm btn-danger"
                                         onclick="event.preventDefault();
                                             if(confirm ('are you sure')){
@@ -49,7 +50,7 @@
                     @endforeach
             </tbody>
         </table>
-
+        {{$products->links()}}
     </div>
 
 @endsection

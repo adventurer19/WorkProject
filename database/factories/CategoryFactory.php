@@ -2,9 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ProductFactory extends Factory
+class CategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,5 +15,10 @@ class ProductFactory extends Factory
     public function definition()
     {
 
+        return [
+            'name'=>$this->faker->unique()->word,
+            'user_id'=>rand(1,10)
+
+        ];
     }
 }

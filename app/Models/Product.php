@@ -19,6 +19,9 @@ class Product extends Model
     public function uploadedFrom(){
         return $this->hasOne(User::class);
     }
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
 
 
 }

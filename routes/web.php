@@ -14,18 +14,23 @@ use App\Http\Controllers\Category\CategoryController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// public route
 Route::name('/')->get('/', function () {
-    return view('home.index',['categories'=>\App\Models\Category::all()]);
+    return view('home.public',['categories'=>\App\Models\Category::all()]);
 });
-//Route::name('list')->get('/list',function (){
-//    return view('home.list',['categories'=>\App\Models\Category::all(),'products'=>\App\Models\Product::all()]);
-//});
 
-Route::name('list')->get('/list', [\App\Http\Controllers\HomeController::class, 'index']);
 
-//Route::get('/home',function (){
-//    return view('product.index');
-//});
+// admin/user panel
+Route::name('panel')->get('/panel',function (){
+    return view('body.main');
+});
+
+
+
+Route::name('list')->get('/list', [\App\Http\Controllers\PublicController::class, 'index']);
+
+
 
 
 Route::prefix('products')->middleware('auth')->resource('/product',ProductController::class);

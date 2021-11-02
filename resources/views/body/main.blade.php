@@ -19,9 +19,13 @@
         <script src="{{asset('js/app.js')}}" defer></script>
     </head>
     <body>
+    <div class="bg-image"
+         style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
+            height: 110vh">
+
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="{{route('/')}}" >Product System</a>
+            <a class="navbar-brand " href="{{route('/')}}" >Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -31,16 +35,14 @@
 
                         <div>
                             @auth
-{{--                                <a href="{{ url('/home') }}" >Home</a>--}}
-                            <!-- onclick remove default action and setting the a tag for getting the hidden form -->
-                                <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit(); " >Logout</a>
-                            <!-- hidden form to get post request for logout ,display :none only csrf token  -->
-                                <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none">
+                                <a href="{{route('/') }}" style="text-decoration: none" >Public Panel</a>
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit(); " style="text-decoration: none" >Logout</a>
+                                <form id="logout-form" action="{{route('logout')}} " method="post" style="display: none;text-decoration: none">
                                     @csrf
                                 </form>
                             @else
 
-                                <a href="{{ route('login') }}" >Login</a>
+                                <a href="{{ route('login') }}" style="text-decoration: none">Login</a>
 
 {{--                                @if (Route::has('register'))--}}
 {{--                                    <a href="{{ route('register') }}" >Register</a>--}}
@@ -58,7 +60,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{route('/')}}">Home</a>
+{{--                        <a class="nav-link" href="{{route('/')}}">Home</a>--}}
                     </li>
                     @can('is-admin')
                     <li class="nav-item">
@@ -76,13 +78,14 @@
         </div>
     </nav>
     @endcan
+
    <main class="container">
 
        @include('partials.alerts')
 
        @yield('content')
-
    </main>
+    </div>
     </body>
 
 </html>

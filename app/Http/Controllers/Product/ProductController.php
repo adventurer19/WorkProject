@@ -26,7 +26,8 @@ class ProductController extends Controller
 
     public function index()
     {
-        return view('product.index',['products'=>Product::paginate(10)],['categories'=>Category::all()]);
+
+        return view('product.index',['products'=>Product::paginate(10)],['categories'=>Category::paginate(10)]);
 //
         // return view('product.index',['products'=>Product::paginate(10)]);
        // todo
