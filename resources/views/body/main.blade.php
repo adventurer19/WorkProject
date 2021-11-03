@@ -39,8 +39,8 @@
 
                         <div>
                             @auth
-                                <a href="{{route('/') }}" style="text-decoration: none" >Public Panel</a>
-                                <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit(); " style="text-decoration: none" >Logout</a>
+                                <a href="{{route('/') }}" style="text-decoration: none;padding: 10px" >Public Panel</a>
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit(); " style="text-decoration: none;padding: 10px" >Logout</a>
                                 <form id="logout-form" action="{{route('logout')}} " method="post" style="display: none;text-decoration: none">
                                     @csrf
                                 </form>

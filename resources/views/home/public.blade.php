@@ -33,11 +33,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
         <div class="form-inline my-2 my-lg-0">
-            <div>
+            <div class="p-lg justify-content-around">
             @if (Route::has('login'))
                 @auth
-                        <a href="{{route('panel') }}  " style="text-decoration: none" >Admin Panel</a>
-                        <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit(); " style="text-decoration: none">Logout</a>
+                        <a href="{{route('panel') }}  " style="text-decoration: none;padding: 10px" >Admin Panel</a>
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit(); " style="text-decoration: none;padding: 10px">Logout</a>
                         <form id="logout-form" action="{{route('logout')}}" method="post" style="display: none;">
                             @csrf
                         </form>
