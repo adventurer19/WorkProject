@@ -55,7 +55,8 @@ class ProductController extends Controller
         $categoryName = $request->category;
         if(!Category::where('name',$categoryName)->exists()){
            auth()->user()->categories()->create([
-              'name'=>$categoryName
+              'name'=>$categoryName,
+
            ]);
         }
         //
@@ -72,6 +73,7 @@ class ProductController extends Controller
             'description'=>$request['description'],
             'image'=>$imagePath
         ]);
+
         $request->session()->flash('success','You have successfully added a new product.');
 
         return redirect(route('product.index'));

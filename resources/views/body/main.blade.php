@@ -82,6 +82,21 @@
         </div>
     </nav>
     @endcan
+{{--
+TODO
+ 1. HTML fix
+ 2. Search + Table of Products /List and after search submit filtered list
+ 3.  php sniffer za laravel jet brains /laravel => code sniffer  php
+ 4. categeries auto complete or select list.
+
+
+--}}
+
+
+
+
+
+
 
    <main class="container">
 

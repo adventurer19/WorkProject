@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Search;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -10,51 +11,61 @@ use Illuminate\Support\Facades\DB;
 
 class PublicController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function index(Request $request){
+        if($request->last){
 
-    public function index(Request $request)
-    {
-
-//TODO category index=>name
-        if($request->last)
-        {
-            $data = DB::table('products')->latest()->take(5)->get();
-            return view('home.list',['items'=>$data,'category'=>3]);
-        }
-        else if($request->product && $request->category)
-        {
-//            dd('both options are mark');
-            $categoryId= Category::where('name',$request->category)->first()->id;
-            $data = DB::table('products')->where('name',$request->product)->where('category_id',$categoryId)->get();
-            return view('home.list',['items'=>$data],['category'=>2]);
-        }
-        else if(!($request->product)){
-            $categoryName = $request->category;
-            $categoryId= Category::where('name',$request->category)->first()->id;
-            $data = DB::table('products')->where('category_id',$categoryId)->get();
-
-            return view('home.list',['items'=>$data,'category'=>$categoryName]);
-
-        }
-        else if(!$request->category)
-        {
-            $product = $request->product;
-            $data = DB::table('products')->where('name','like', '%'.$product)->get();
-
-            return view('home.list',['items'=>$data,'category'=>3]);
-
+            $all = Category::all();
+            $data = Product::latest()->take(5)->get();
+//            return view('public.recently.recent',['data'=>$data],['categories'=>Category::all()]);
+            return view('public.recently.recent',['data'=>$data],['categories'=>$all]);
         }
 
 //        $request->validate([
 //            'name'=>'alpha',
 //            'category'=>'required'
 //        ]);
+//
+//        // scenario with product and category
+//        if($request->product && $request->category){
+//
+//            $product = $request->product;
+//
+//            $categoryId= Category::where('name',$request->category)->first()->id;
+//
+//            $data = Product::where('name',$product)->where('category_id',$categoryId)->get();
+//
+//            dd($data);
+//
+//            return view('public.recently.recent',['data'=>$data],['categories'=>Category::all()]);
+//        }
+//        // scenario only by category
+//        else if(!($request->product)){
+//
+//            $categoryName = $request->category;
+//            $categoryId= Category::where('name',$categoryName)->first()->id;
+////            $data = DB::table('products')->where('category_id',$categoryId)->get();
+//            $data = Product::where('category_id',$categoryId)->get();
+//            return view('public.recently.recent',['data'=>$data],['categories'=>Category::all()]);
+//
+//        }
+//        else if(!$request->category)
+//        {
+//            $product = $request->product;
+//            $data = DB::table('products')->where('name','like', '%'.$product)->get();
+//
+//            return view('public.recently.recent',['data'=>$data],['categories'=>Category::all()]);
+//
+//        }
 
-        return view('home.public',['categories'=>Category::all()]);
+
+
+//        return view('public.index',['categories'=>Category::all()]);
     }
 
     /**

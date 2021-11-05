@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\PublicController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,15 +16,17 @@ use App\Http\Controllers\Category\CategoryController;
 |
 */
 
-// public route
-Route::name('/')->get('/', function () {
-    return view('home.public',['categories'=>\App\Models\Category::all()]);
-});
+
 
 
 // admin/user panel
 Route::name('panel')->get('/panel',function (){
     return view('body.main');
+});
+
+//Route::name('/')->get('/',[PublicController::class,'public']);
+Route::name('/')->get('/',function (){
+    return view('public.index',['categories'=>\App\Models\Category::all()]);
 });
 
 
