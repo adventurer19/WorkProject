@@ -27,7 +27,7 @@
             {{--            "nav navbar-nav navbar-right"--}}
 
             {{--            @auth <a class="navbar-brand">Logged as {{Auth::user()->name}}</a> @endauth--}}
-            <a class="navbar-brand " href="{{route('/')}}" >Home!</a>
+            <a class="navbar-brand " href="{{route('/')}}" >Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -37,7 +37,7 @@
 
                     <div>
                         @auth
-                            <a href="{{route('/') }}" style="text-decoration: none;padding: 10px" >Public Panel</a>
+                            <a href="{{route('panel') }}" style="text-decoration: none;padding: 10px" >Switch on Admin Panel</a>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit(); " style="text-decoration: none;padding: 10px" >Logout</a>
                             <form id="logout-form" action="{{route('logout')}} " method="post" style="display: none;text-decoration: none">
                                 @csrf
@@ -55,30 +55,7 @@
         </div>
     </nav>
 
-    @can('logged-in')
-        <nav class="navbar sub-nav navbar-expand-lg">
-            <div class="container">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            {{--                        <a class="nav-link" href="{{route('/')}}">Home</a>--}}
-                        </li>
-                        @can('is-admin')
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{route('admin.users.index')}}">Users</a>
-                            </li>
-                        @endcan
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('product.index')}}">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('category.index')}}">Categories</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    @endcan
+
     {{--
     TODO
      1. HTML fix
@@ -97,9 +74,9 @@
 
     <main class="container">
         @include('partials.alerts')
+        @if(!isset($show))
         @include('public.search')
-
-
+        @endif
 @yield('content')
 </main>
 </div>

@@ -20,13 +20,20 @@ use App\Http\Controllers\PublicController;
 
 
 // admin/user panel
-Route::name('panel')->get('/panel',function (){
-    return view('body.main');
+Route::name('/')->get('/',function (){
+    return view('public.index',['categories'=>\App\Models\Category::all()]);
+
 });
 
 //Route::name('/')->get('/',[PublicController::class,'public']);
-Route::name('/')->get('/',function (){
-    return view('public.index',['categories'=>\App\Models\Category::all()]);
+Route::name('panel')->get('/panel',function (){
+    return view('body.main',['categories'=>\App\Models\Category::all()]);
+
+
+});
+Route::name('asearch')->get('/search',function (){
+    return view('body.search',['categories'=>\App\Models\Category::all()]);
+
 });
 
 

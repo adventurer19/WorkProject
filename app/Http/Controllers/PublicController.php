@@ -18,54 +18,51 @@ class PublicController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request){
+
+        /** screnario with recent */
+        $categories = Category::all();
+        $product = $request->product;
+        $categoryName = $request->category;
+        $categoryId= Category::where('name',$categoryName)->first()->id ?? null;
         if($request->last){
 
-            $all = Category::all();
             $data = Product::latest()->take(5)->get();
-//            return view('public.recently.recent',['data'=>$data],['categories'=>Category::all()]);
-            return view('public.recently.recent',['data'=>$data],['categories'=>$all]);
+            return view('public.list.list',['data'=>$data],['categories'=>$categories]);
         }
 
-//        $request->validate([
-//            'name'=>'alpha',
-//            'category'=>'required'
-//        ]);
-//
-//        // scenario with product and category
-//        if($request->product && $request->category){
-//
-//            $product = $request->product;
-//
-//            $categoryId= Category::where('name',$request->category)->first()->id;
-//
-//            $data = Product::where('name',$product)->where('category_id',$categoryId)->get();
-//
-//            dd($data);
-//
-//            return view('public.recently.recent',['data'=>$data],['categories'=>Category::all()]);
-//        }
-//        // scenario only by category
-//        else if(!($request->product)){
-//
-//            $categoryName = $request->category;
-//            $categoryId= Category::where('name',$categoryName)->first()->id;
-////            $data = DB::table('products')->where('category_id',$categoryId)->get();
-//            $data = Product::where('category_id',$categoryId)->get();
-//            return view('public.recently.recent',['data'=>$data],['categories'=>Category::all()]);
-//
-//        }
-//        else if(!$request->category)
-//        {
-//            $product = $request->product;
-//            $data = DB::table('products')->where('name','like', '%'.$product)->get();
-//
-//            return view('public.recently.recent',['data'=>$data],['categories'=>Category::all()]);
-//
-//        }
+        $request->validate([
+            'name'=>'alpha',
+            'category'=>'required'
+        ]);
+
+        /** scenario only with product and category */
+        if($request->product && $request->category){
+
+            $data = Product::where('name',$product)->where('category_id',$categoryId)->get();
+
+            return view('public.list.list',['data'=>$data],['categories'=>$categories]);
+        }
+        /** scenario only with category */
+        else if(!($request->product)){
+
+
+            $data = Product::where('category_id',$categoryId)->get();
+            return view('public.list.list',['data'=>$data],['categories'=>Category::all()]);
+
+        }
+        /** scenario only with product */
+        else if(!$request->category)
+        {
+
+            $data = DB::table('products')->where('name','like', '%'.$product)->get();
+
+            return view('public.list.list',['data'=>$data],['categories'=>Category::all()]);
+
+        }
 
 
 
-//        return view('public.index',['categories'=>Category::all()]);
+        return view('public.index',['categories'=>Category::all()]);
     }
 
     /**
@@ -95,10 +92,9 @@ class PublicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-
-        return view('home.show',['product'=>Product::find($id)]);
+    public function show($id){
+        $categories = Category::all();
+        return view('public.list.show',['product'=>Product::find($id),'show'=>'show'],['categories'=>$categories]);
 
     }
 

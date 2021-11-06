@@ -29,7 +29,7 @@
 {{--            "nav navbar-nav navbar-right"--}}
 
 {{--            @auth <a class="navbar-brand">Logged as {{Auth::user()->name}}</a> @endauth--}}
-            <a class="navbar-brand " href="{{route('/')}}" >Home</a>
+            <a class="navbar-brand " href="{{route('asearch')}}" >Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -39,7 +39,7 @@
 
                         <div>
                             @auth
-                                <a href="{{route('/') }}" style="text-decoration: none;padding: 10px" >Public Panel</a>
+                                <a href="{{route('/') }}" style="text-decoration: none;padding: 10px" >Switch to Public Panel</a>
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit(); " style="text-decoration: none;padding: 10px" >Logout</a>
                                 <form id="logout-form" action="{{route('logout')}} " method="post" style="display: none;text-decoration: none">
                                     @csrf

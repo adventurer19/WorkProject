@@ -22,9 +22,16 @@
                 </td>
 
             </tr>
+
         @endforeach
         </tbody>
+
     </table>
+    @isset($data)
+        <div class="button  position-absolute bottom-0 end-0">
+        <a type="submit" href="{{route('/')}}" class="btn btn-sm btn-primary"> RESET </a>
+        </div>
+    @endisset
 {{--    <a class="btn btn-sm btn-outline-primary" href="{{route('/')}}" role="button" >Back to the search</a>--}}
 
 </div>

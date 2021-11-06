@@ -23,8 +23,9 @@ class UserController extends Controller
 //         //   dd('no access allowed'); -- testng
 //        }
         if(Gate::allows('is-admin')){
-
-            return view('admin.users.index',['users'=>User::paginate(5)]);
+            $id = auth()->id();
+//            $data = User::paginate(5)->except($id);
+            return view('admin.users.index',['users'=>User::paginate(5)->except($id)]);
         }
 
 
@@ -49,6 +50,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
+
         $newUser = new CreateNewUser();
         $user =$newUser->create($request->all());
         $user->roles()->attach([
