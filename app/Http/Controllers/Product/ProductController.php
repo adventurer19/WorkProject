@@ -11,6 +11,7 @@ use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+use mysql_xdevapi\Exception;
 
 class ProductController extends Controller
 {
@@ -58,15 +59,7 @@ class ProductController extends Controller
    */
     public function store(StoreProductRequest $request)
     {
-      dd($request->image);
         $categoryName = $request->category;
-        if (!Category::where('name', $categoryName)->exists()) {
-            auth()->user()->categories()->create([
-            'name' => $categoryName,
-
-            ]);
-        }
-      //
 
         $imagePath = $request['image']->store('uploads', 'public');
         $image = Image::make(public_path("storage/{$imagePath}"))
@@ -74,16 +67,21 @@ class ProductController extends Controller
         $image->save();
 
         $idCategory = Category::where('name', $categoryName)->first()->id;
-        auth()->user()->products()->create([
-        'category_id' => $idCategory,
-        'name' => $request['name'],
-        'category' => $request['category'],
-        'description' => $request['description'],
-        'image' => $imagePath,
-        ]);
+        try {
+            auth()->user()->products()->create([
+            'category_id' => $idCategory,
+            'name' => $request['name'],
+            'category' => $request['category'],
+            'description' => $request['description'],
+            'image' => $imagePath,
+            ]);
+            $request->session()
+            ->flash('success', 'You have successfully added a new product.');
+        } catch (Exception $e) {
+            $request->session()
+            ->flash('error', 'You can not add this product.');
+        }
 
-        $request->session()
-        ->flash('success', 'You have successfully added a new product.');
 
         return redirect(route('product.index'));
     }
@@ -124,37 +122,32 @@ class ProductController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
-    public function update(Request $request, $id)
+    public function update(EditProductRequest $request, $id)
     {
-      dd($request);
-      $product = Product::find($id);
-      dd($request->hasFile('image'));
-
-
-        $catId  = Category::where('name',$request->category)->firstOrFail()->id;
-        $request->request->add(['category_id'=>$catId]);
+        $product = Product::find($id);
         if (!$product) {
             $request->session()->flash('error', 'You can not edit this product.');
             return redirect(route('product.index'));
         }
-        if($request->image){
-          $path = public_path().'/storage/uploads';
-          $file = $request->image;
-          $filename = $file->getClientOriginalName();
-          $file->move($path, $filename);
-          $product->update(['image'=>$filename]);
-//          dd($path);
-//          $imagePath = $request['image']->store('uploads', 'public');
-//          $image = Image::make(public_path("storage/{$imagePath}"))
-//            ->fit(250, 250);
-//          $image->save();
-//          $request->request->add(['image'=>$imagePath]);
-//          $product->update($request->all());
 
-        }else{
-          $product->update($request->except('image'));
+        $catId  = Category::where('name', $request->category)->firstOrFail()->id;
+
+        $request->request->add(['category_id'=>$catId]);
+        if (!$request->description) {
+            $request->request->add(['description'=>$product->description]);
         }
 
+        if ($request->file('image')) {
+            $imagePath = $request['image']->store('uploads', 'public');
+            $image = Image::make(public_path("storage/{$imagePath}"))
+            ->fit(250, 250);
+            $image->save();
+            $request->request->add(['image'=>$imagePath]);
+
+            $product->update($request->input());
+        } else {
+            $product->update($request->except('image'));
+        }
 
         $request->session()
         ->flash('success', 'The Product is edited successfully.');
@@ -171,9 +164,15 @@ class ProductController extends Controller
    */
     public function destroy($id, Request $request)
     {
-        Product::destroy($id);
-        $request->session()
-        ->flash('success', 'The product is deleted successfully.');
+        try {
+            Product::destroy($id);
+            $request->session()
+            ->flash('success', 'The product is deleted successfully.');
+        } catch (Exception $e) {
+            $request->session()
+            ->flash('alert', 'The product can not  deleted successfully.');
+        }
+
         return redirect(route('product.index'));
     }
 }

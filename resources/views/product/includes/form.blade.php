@@ -2,7 +2,8 @@
 <div class="mb-3">
     <label for="name" class="form-label">Name</label>
     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="exampleInputEmail1"
-           aria-describedby="name" value="{{old('name')}}@isset($product){{$product->name}} @endisset ">
+           aria-describedby="name" value="{{old('name')}}" placeholder="@isset($product){{$product->name}} @endisset ">
+{{--           aria-describedby="name" value="{{old('name')}}">--}}
     @error('name')
     <span class="invalid-feedback" role="alert">
                                 {{ $message}}
@@ -41,7 +42,7 @@
     <input type="text" name="description" class="form-control @error('description') is-invalid @enderror"
            id="description"
            aria-describedby="description"
-           value="{{old('description')}}@isset($product){{$product->description}} @endisset ">
+           value="{{old('description')}}" placeholder="@isset($product){{$product->description}} @endisset ">
     @error('description')
     <span class="invalid-feedback" role="alert">
                                 {{ $message}}
