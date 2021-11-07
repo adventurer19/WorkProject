@@ -12,10 +12,13 @@
 
     <link rel="icon" type="image/png" sizes="32x32" href="{{asset('icon.ico')}}">
     <link rel="icon" type="image/png" href="{{ asset('icon.png') }}">
+
     <!-- JS -->
-
-
     <script src="{{asset('js/app.js')}}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js" ></script>
+
+
 </head>
 <body>
 <div class="bg-image"
@@ -64,7 +67,7 @@
             <form action="{{route('public.index')}}" method="get" id="list">
                 <label for="product" class="form-label d-flex">
                     <input name="product" type="text" placeholder="Product name.. " value="{{old('product')}}"
-                           class="form-control"
+                           class="form-control
                            @error('product') is-invalid @enderror"
                     aria-describedby="product" >
                     @error('product')
@@ -76,24 +79,28 @@
                 <hr>
 
 
-
-                <label for="category" class="form-label offset-2">
-                    Category
-                    <select id="category" name="category" style="border:none">
-                        @foreach(\App\Models\Category::all() as $category)
-                            <option value="{{$category->name}}">{{$category->name}}</option>
-                        @endforeach
-                    </select>
-
-                </label>
-
+                                <label for="category" class="form-label d-flex ">
+                                    <input type="text"   class="form-control"  name="category" id="category"  placeholder="Category name.. " />
+                                </label>
+                <hr>
+{{--                <label for="" class="form-label offset-2 ">--}}
+{{--                    Check categories--}}
+{{--                    <select id="" name="" style="border:none">--}}
+{{--                        <option value="">Click me</option>--}}
+{{--                        @foreach(\App\Models\Category::all() as $category)--}}
+{{--                            <option value="{{$category->name}}">{{$category->name}}</option>--}}
+{{--                        @endforeach--}}
+{{--                    </select>--}}
+{{--                </label>--}}
                 <div class="form-check offset-2">
                     <input class="form-check-input " type="checkbox"  name="ignore" id="ignore">
                     <label class="form-check-label" for="ignore">
                         Ignore Category
                     </label>
                 </div>
+
             </form>
+
 
             <div class="g-3 offset-2 ">
 
@@ -109,3 +116,28 @@
 </div>
 </body>
 </html>
+
+<script>
+
+    var path = "{{ url('typeahead_autocomplete/action') }}";
+
+    $('#category').typeahead({
+
+        source: function(query, process){
+
+            return $.get(path, {query:query}, function(data){
+
+                return process(data);
+
+            });
+
+        }
+
+    });
+
+</script>
+
+
+
+
+

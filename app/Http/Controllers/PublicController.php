@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 class PublicController extends Controller
 {
 
+
     public function search()
     {
         return view('body.public');
