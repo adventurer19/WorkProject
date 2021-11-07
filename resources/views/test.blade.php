@@ -2,7 +2,7 @@
     @foreach($roles as $role)
         <div class="form-check">
             <input class="form-check-input"
-                   name ="roles[]"
+                   name="roles[]"
                    type="checkbox"
                    value="{{$role->id}}"
                    id="{{$role->name}}">

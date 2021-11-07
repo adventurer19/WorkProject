@@ -2,31 +2,30 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Category;
 use Illuminate\Foundation\Http\FormRequest;
 
-class Search extends FormRequest
-{
+class EditProductRequest extends FormRequest {
 
   /**
    * Determine if the user is authorized to make this request.
    *
    * @return bool
    */
-    public function authorize()
-    {
-        return true;
-    }
+  public function authorize() {
+    return TRUE;
+  }
 
   /**
    * Get the validation rules that apply to the request.
    *
    * @return array
    */
-    public function rules()
-    {
+  public function rules() {
         return [
-        'category' => Category::all(),
+          'name' => 'max:255',
+          'category' => 'max:255',
+          'description' => 'max:255',
         ];
-    }
+  }
+
 }

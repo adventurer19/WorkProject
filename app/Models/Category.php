@@ -5,22 +5,53 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model {
+/**
+ * App\Models\Category
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Product[]
+ *   $products
+ * @property-read int|null $products_count
+ * @property-read \App\Models\User $user
+ * @method static \Database\Factories\CategoryFactory factory(...$parameters)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category
+ *   newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Category newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Category query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Category
+ *   whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category
+ *   whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category
+ *   whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category
+ *   whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Category
+ *   whereUserId($value)
+ * @mixin \Eloquent
+ */
+class Category extends Model
+{
 
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
-        'name',
+    'user_id',
+    'name',
     ];
 
-    public function user(){
+    public function user()
+    {
 
         return $this->belongsTo(User::class);
-
     }
-    public function products(){
+
+    public function products()
+    {
         return $this->hasMany(Product::class);
     }
-
 }

@@ -7,7 +7,8 @@
             @csrf
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
-                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" aria-describedby="email" value="{{old('email')}}">
+                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email"
+                       aria-describedby="email" value="{{old('email')}}">
                 @error('email')
                 <span class="invalid-feedback" role="alert">
                                 {{$message}}

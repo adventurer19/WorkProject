@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Product\ProductController;
 use App\Http\Controllers\Category\CategoryController;
 use App\Http\Controllers\PublicController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,37 +18,35 @@ use App\Http\Controllers\PublicController;
 */
 
 
-
-
 // admin/user panel
-Route::name('/')->get('/',function (){
-    return view('public.index',['categories'=>\App\Models\Category::all()]);
-
+Route::name('/')->get('/', function () {
+    return view('public.index', ['categories' => \App\Models\Category::all()]);
 });
 
 //Route::name('/')->get('/',[PublicController::class,'public']);
-Route::name('panel')->get('/panel',function (){
-    return view('body.main',['categories'=>\App\Models\Category::all()]);
-
-
+Route::name('panel')->get('/panel', function () {
+    return view('body.main', ['categories' => \App\Models\Category::all()]);
 });
-Route::name('asearch')->get('/search',function (){
-    return view('body.search',['categories'=>\App\Models\Category::all()]);
-
+Route::name('asearch')->get('/search', function () {
+    return view('body.search', ['categories' => \App\Models\Category::all()]);
 });
 
 
+Route::prefix('public')
+  ->resource('/public', \App\Http\Controllers\PublicController::class);
 
 
-Route::prefix('public')->resource('/public',\App\Http\Controllers\PublicController::class);
+Route::prefix('products')
+  ->middleware('auth')
+  ->resource('/product', ProductController::class);
 
+Route::prefix('categories')
+  ->middleware('auth')
+  ->resource('/category', CategoryController::class);
 
-
-
-Route::prefix('products')->middleware('auth')->resource('/product',ProductController::class);
-
-Route::prefix('categories')->middleware('auth')->resource('/category',CategoryController::class);
-
-Route::prefix('admin')->middleware(['auth','auth.admin'])->name('admin.')->group(function (){
-    Route::resource('/users',UserController::class);
-});
+Route::prefix('admin')
+  ->middleware(['auth', 'auth.admin'])
+  ->name('admin.')
+  ->group(function () {
+    Route::resource('/users', UserController::class);
+  });
