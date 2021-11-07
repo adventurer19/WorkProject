@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="row">
-        <div class="col-12 p-3">
-            <h1 class="float-left">All Products</h1>
+        <div class="col-12 p-2">
+            <h1 class="float-left" style="color: white" >All Products</h1>
             <a class="btn btn-sm btn-success " href="{{route('product.create')}}" role="button">Add New Product</a>
         </div>
     </div>

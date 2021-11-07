@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-12 p-3 ">
-            <h1 class="float-left">List of all Categories</h1>
+            <h1 class="float-left" style="color: white">List of all Categories</h1>
             <a class="btn btn-sm btn-success " href="{{route('category.create')}}" role="button">Add New Category</a>
         </div>
     </div>

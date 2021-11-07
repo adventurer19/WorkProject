@@ -8,7 +8,7 @@
 
     <!-- Styles -->
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
-    {{--        <link rel="icon" href="{{ url('storage/favicon.jpg') }}">--}}
+    <link rel="icon" href="{{ url('storage/favicon.jpg') }}">
 
     <link rel="icon" type="image/png" sizes="32x32" href="{{asset('icon.ico')}}">
     <link rel="icon" type="image/png" href="{{ asset('icon.png') }}">
@@ -19,15 +19,13 @@
 </head>
 <body>
 <div class="bg-image"
-     style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
+     style="background-image: url('https://www.palmabeach.bg/wp-content/uploads/2021/04/imported_rokka.jpg');
             height: 110vh">
     <nav class="navbar navbar-expand-lg p-2">
         @auth <a class="navbar-brand">Logged as {{Auth::user()->name}}</a> @endauth
         <div class="container">
-            {{--            "nav navbar-nav navbar-right"--}}
 
-            {{--            @auth <a class="navbar-brand">Logged as {{Auth::user()->name}}</a> @endauth--}}
-            <a class="navbar-brand " href="{{route('/')}}">Home</a>
+            <a class="navbar-brand " href="{{route('search')}}">Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -38,7 +36,7 @@
 
                     <div>
                         @auth
-                            <a href="{{route('panel') }}" style="text-decoration: none;padding: 10px">Switch on Admin
+                            <a href="{{route('panel')}}" style="text-decoration: none;padding: 10px">Switch on Admin
                                 Panel</a>
                             <a href="{{ route('logout') }}"
                                onclick="event.preventDefault();document.getElementById('logout-form').submit(); "
@@ -48,11 +46,7 @@
                                 @csrf
                             </form>
                         @else
-                            <a href="{{ route('login') }}" style="text-decoration: none">Login</a>
-
-                            {{--                                @if (Route::has('register'))--}}
-                            {{--                                    <a href="{{ route('register') }}" >Register</a>--}}
-                            {{--                                @endif--}}
+                            <a href="{{ route('login',['set'=>'set']) }}" style="text-decoration: none">Login</a>
                         @endauth
                     </div>
                 @endif
@@ -60,25 +54,42 @@
         </div>
     </nav>
 
-
-    {{--
-    TODO
-     1. HTML fix
-     2. Search + Table of Products /List and after search submit filtered list
-     3.  php sniffer za laravel jet brains /laravel => code sniffer  php
-     4. categeries auto complete or select list.
-
-
-    --}}
-
-
     <main class="container">
         @include('partials.alerts')
-        @if(!isset($show))
-            @include('public.search')
-        @endif
-        @yield('content')
+
+        <div class="p-5"></div>
+        <div class="card col-5 offset-3">
+            <div class="row">
+                <div class="col-sm-8">
+                    <img src="/storage/{{$product->image}}" class="" alt="/views/errors/no-imageava.jpg">
+                </div>
+                <div class="col-3">
+                    <div>
+                        <div class="d-flex align-items-center">
+                        </div>
+                    </div>
+                    <strong>Product title</strong> :<span>
+                    {{$product->name}}
+                </span>
+                    <hr>
+                    <strong>Description</strong>:<span>
+                    {{$product->description}}
+                </span>
+                    <hr>
+                    <strong>Category</strong>:<span>
+                    {{$product->category()->first()->name}}
+                </span>
+                    <hr>
+                                    <a class="btn btn-sm btn-outline-primary" href="{{url()->previous()}}" role="button" >Back to list</a>
+
+                </div>
+            </div>
+        </div>
     </main>
 </div>
 </body>
 </html>
+
+
+
+

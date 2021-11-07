@@ -1,6 +1,6 @@
-@extends('body.main')
+@extends('body.public')
 
-@section('content')
+@section('public')
     <div class="col-md-4     offset-4 card">
         <h1>Login</h1>
         <form method="post" action="{{route('login')}} ">

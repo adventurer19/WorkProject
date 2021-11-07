@@ -28,8 +28,9 @@ class CategorySeeder extends Seeder
         'music',
         'entrainment',
         'vacation',
+        'no category',
         ];
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 11; $i++) {
             $category = new Category([
             'user_id' => rand(1, 10),
             'name' => $data[$i - 1],

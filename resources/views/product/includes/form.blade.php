@@ -18,7 +18,6 @@
             @foreach($data as $category)
                 <option value="{{$category->name}}">{{$category->name}}</option>
             @endforeach
-            <option value="">no category</option>
         </select>
     </label>
 </div>

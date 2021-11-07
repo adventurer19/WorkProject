@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="row">
-        <div class="col-12 p-3">
-            <h1 class="float-left">Users</h1>
+        <div class="col-12 p-3" >
+            <h1 class="float-left" style="color: white" >Users</h1>
             <a class="btn btn-sm btn-success " href="{{route('admin.users.create')}}" role="button">Add User</a>
 
 

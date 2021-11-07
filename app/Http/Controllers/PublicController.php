@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\DB;
 class PublicController extends Controller
 {
 
+    public function search()
+    {
+        return view('body.public');
+    }
   /**
    * Display a listing of the resource.
    *
@@ -20,30 +24,36 @@ class PublicController extends Controller
     public function index(Request $request)
     {
 
-      /** screnario with recent */
-        $categories = Category::all();
+      /** scenario with recent */
         $product = $request->product;
         $categoryName = $request->category;
         $categoryId = Category::where('name', $categoryName)->first()->id ?? null;
         if ($request->last) {
             $data = Product::latest()->take(5)->get();
             return view(
-                'public.list.list',
+                'body.search.list',
                 ['data' => $data],
-                ['categories' => $categories]
             );
         }
         $request->validate([
         'product' => 'alpha|nullable',
         ]);
+        /** scenario with ignore category */
+        if ($request->ignore) {
+            $data = Product::where('name', 'like', '%' . $product . '%')->get();
+
+            return view(
+                'body.search.list',
+                ['data' => $data],
+            );
+        }
 
       /** scenario only with category */
         if (!($request->product)) {
             $data = Product::where('category_id', $categoryId)->get();
             return view(
-                'public.list.list',
+                'body.search.list',
                 ['data' => $data],
-                ['categories' => $categories]
             );
         }
       /** scenario only with product and category */
@@ -53,25 +63,13 @@ class PublicController extends Controller
             ->get();
 
             return view(
-                'public.list.list',
+                'body.search.list',
                 ['data' => $data],
-                ['categories' => $categories]
             );
-        } else {
-            if (!($request->category && $request->product)) {
-                $data = Product::where('name', 'like', '%' . $product . '%')->get();
-              //            dd($data);
-
-                return view(
-                    'public.list.list',
-                    ['data' => $data],
-                    ['categories' => $categories]
-                );
-            }
         }
 
 
-        return view('public.index', ['categories' => Category::all()]);
+//        return view('body.public');
     }
 
   /**
@@ -105,11 +103,10 @@ class PublicController extends Controller
    */
     public function show($id)
     {
-        $categories = Category::all();
         return view(
-            'public.list.show',
-            ['product' => Product::find($id), 'show' => 'show'],
-            ['categories' => $categories]
+            'body.search.show',
+            ['set'=>'set'],
+            ['product' => Product::find($id)]
         );
     }
 

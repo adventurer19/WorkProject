@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,16 +19,15 @@
 </head>
 <body>
 <div class="bg-image"
-     style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
-            height: 110vh">
-
+     style="background-image: url('https://wallpaperaccess.com/full/16692.jpg');
+            height: 100vh">
     <nav class="navbar navbar-expand-lg p-2">
         @auth <a class="navbar-brand">Logged as {{Auth::user()->name}}</a> @endauth
         <div class="container">
             {{--            "nav navbar-nav navbar-right"--}}
 
             {{--            @auth <a class="navbar-brand">Logged as {{Auth::user()->name}}</a> @endauth--}}
-            <a class="navbar-brand " href="{{route('asearch')}}">Home</a>
+            <a class="navbar-brand " href="{{route('panel')}}">Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -64,23 +62,27 @@
     </nav>
 
     @can('logged-in')
-        <nav class="navbar sub-nav navbar-expand-lg">
-            <div class="container">
+        <nav class="navbar sub-nav navbar-expand-lg" style="background: transparent">
+{{--        <nav class="navbar sub-nav navbar-expand-lg">--}}
+            <div class="container" >
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
+                    <ul  class="navbar-nav mr-auto">
                         <li class="nav-item active">
                             {{--                        <a class="nav-link" href="{{route('/')}}">Home</a>--}}
                         </li>
                         @can('is-admin')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('admin.users.index')}}">Users</a>
+                                <a class="nav-link" href="{{route('admin.users.index')}}" style="color: white" >Users</a>
                             </li>
                         @endcan
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('product.index')}}">Products</a>
+                            <a class="nav-link" href="{{route('product.index')}}" style="color: white" >Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('category.index')}}">Categories</a>
+                            <a class="nav-link" href="{{route('category.index')}}" style="color: white" >Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('search')}}" style="color: white" >Search</a>
                         </li>
                     </ul>
                 </div>
@@ -99,7 +101,7 @@
 
 
     <main class="container">
-
+@csrf
         @include('partials.alerts')
 
         @yield('content')
