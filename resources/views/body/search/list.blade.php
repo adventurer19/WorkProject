@@ -24,25 +24,18 @@
                             <a href="{{route("public.show",$product->id)}}" role="button">
                                 <img src="/storage/{{$product->image}}" style="width: 40px;height: 35px" alt=""></a>
                         </td>
-
                     </tr>
-
                 @endforeach
                 </tbody>
-
-
             </table>
-
             @isset($data)
                 <div class="button  position-absolute bottom-0 end-0">
                     <a type="submit" href="{{route('search')}}" class="btn btn-sm btn-primary"> RESET </a>
                 </div>
             @endisset
-{{--                <a class="btn btn-sm btn-outline-primary" href="{{route('/')}}" role="button" >Back to the search</a>--}}
+        {{$data->appends(Request::all())->links() }}
 
     </div>
-
     @endif
-
 @endsection
 

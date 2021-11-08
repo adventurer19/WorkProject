@@ -41,11 +41,11 @@ class PublicController extends Controller
         ]);
         /** scenario with ignore category */
         if ($request->ignore) {
-            $data = Product::where('name', 'like', '%' . $product . '%')->get();
+            $data = Product::where('name', 'like', '%' . $product . '%')->paginate(8);
 
             return view(
-                'body.search.list',
-                ['data' => $data],
+                'body.search.list',compact('data')
+
             );
         }
 
