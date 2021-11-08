@@ -8,21 +8,24 @@ use Illuminate\Support\Facades\DB;
 
 class AutocomplateController extends Controller
 {
-  function index()
-  {
-    return view('body.public');
-  }
 
-  function action(Request $request)
-  {
-    $data = $request->all();
+    public function index()
+    {
 
-    $query = $data['query'];
+        return view('body.public');
+    }
 
-    $filter_data = Category::select('name')
-      ->where('name', 'LIKE', '%'.$query.'%')
-      ->get();
+    public function action(Request $request)
+    {
 
-    return response()->json($filter_data);
-  }
+        $data = $request->all();
+
+        $query = $data['query'];
+
+        $filter_data = Category::select('name')
+        ->where('name', 'LIKE', '%' . $query . '%')
+        ->get();
+
+        return response()->json($filter_data);
+    }
 }

@@ -44,8 +44,8 @@ class PublicController extends Controller
             $data = Product::where('name', 'like', '%' . $product . '%')->paginate(8);
 
             return view(
-                'body.search.list',compact('data')
-
+                'body.search.list',
+                compact('data')
             );
         }
 

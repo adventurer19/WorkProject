@@ -18,8 +18,8 @@ use App\Http\Controllers\PublicController;
 */
 
 Route::get('/typeahead_autocomplete', [\App\Http\Controllers\AutocomplateController::class, 'index']);
-
-Route::get('/typeahead_autocomplete/action', [\App\Http\Controllers\AutocomplateController::class, 'action'])->name('typeahead_autocomplete.action');
+Route::get('/typeahead_autocomplete/action', [\App\Http\Controllers\AutocomplateController::class, 'action'])
+  ->name('typeahead_autocomplete.action');
 
 
 
